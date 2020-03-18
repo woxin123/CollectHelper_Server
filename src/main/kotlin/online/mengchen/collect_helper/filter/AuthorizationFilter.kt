@@ -2,9 +2,7 @@ package online.mengchen.collect_helper.filter
 
 import online.mengchen.collect_helper.common.Constant
 import org.springframework.http.HttpMethod
-import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.servlet.HandlerInterceptor
-import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -21,8 +19,9 @@ class AuthorizationFilter : HandlerInterceptor{
             return true
         }
         val session = request.session
-        if (session.getAttribute(Constant.SESSION.USER) == null) {
-            request.getRequestDispatcher("/session/error").forward(request, response)
+        if (session.getAttribute(Constant.Session.USER) == null) {
+            request.getRequestDispatcher(Constant.Session.SESSION_ERROR).forward(request, response)
+            return false
         }
         return true
     }
