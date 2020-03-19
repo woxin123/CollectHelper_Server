@@ -1,16 +1,21 @@
 package online.mengchen.collect_helper.pojo.dto
 
-import javax.validation.constraints.NotBlank
+import online.mengchen.collect_helper.pojo.User
+import java.io.Serializable
 
 /**
  * @Author mengchen
- * @create 2020-13-17 10:13
+ * @create 2020-00-17 14:00
  */
-data class UserDTO(
-        @NotBlank
-        var username: String = "",
-        var avatar: String = "",
-        var phone: String = "",
-        @NotBlank
-        var password: String
-)
+class UserDTO (
+        var userId: Long,
+        var username: String,
+        var phone: String? = null,
+        var avatar: String? = null
+): Serializable {
+    companion object {
+        fun convert(user: User): UserDTO {
+            return UserDTO(user.uid!!, user.username, user.phone, user.avatar)
+        }
+    }
+}

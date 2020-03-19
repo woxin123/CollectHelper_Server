@@ -1,6 +1,6 @@
 package online.mengchen.collect_helper.service
 
-import online.mengchen.collect_helper.pojo.dto.UserDTO
+import online.mengchen.collect_helper.pojo.dto.RegisterUserDTO
 import online.mengchen.collect_helper.pojo.vo.UserVO
 
 /**
@@ -11,7 +11,7 @@ interface UserService {
 
     fun login(username: String, password: String): Boolean
 
-    fun addUser(userDTO: UserDTO): UserVO
+    fun addUser(registerUserDTO: RegisterUserDTO): UserVO
 
     fun findUserById(id: Long): UserVO?
 

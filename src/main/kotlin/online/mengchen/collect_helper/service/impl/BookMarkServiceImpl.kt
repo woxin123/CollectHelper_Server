@@ -1,8 +1,12 @@
 package online.mengchen.collect_helper.service.impl
 
+import online.mengchen.collect_helper.dao.BookMarkCategoryRepository
 import online.mengchen.collect_helper.dao.BookMarkRepository
+import online.mengchen.collect_helper.dao.UserRepository
 import online.mengchen.collect_helper.pojo.BookMark
+import online.mengchen.collect_helper.pojo.BookMarkCategory
 import online.mengchen.collect_helper.pojo.dto.BookMarkDTO
+import online.mengchen.collect_helper.pojo.dto.UserDTO
 import online.mengchen.collect_helper.pojo.vo.BookMarkVO
 import online.mengchen.collect_helper.service.BookMarkService
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,15 +30,47 @@ class BookMarkServiceImpl : BookMarkService {
     @Autowired
     lateinit var bookMarkRepository: BookMarkRepository
 
+    @Autowired
+    lateinit var bookMarkCategoryRepository: BookMarkCategoryRepository
+
+    @Autowired
+    lateinit var userRepository: UserRepository
+
     private var restTemplate: RestTemplate = RestTemplate()
 
-    override fun addBookMark(bookMarkDTO: BookMarkDTO): BookMarkVO? {
+    /**
+     * 校验 categoryId
+     *  - -1 查找是否有未分类的类别，如果没有创建一个
+     */
+    override fun addBookMark(bookMarkDTO: BookMarkDTO, userDTO: UserDTO): BookMarkVO? {
         if (!validBookMark(bookMarkDTO)) {
             return null
         }
-        val bookMark = BookMark(url = bookMarkDTO.url, createTime = bookMarkDTO.createTime)
+        val user = userRepository.findById(userDTO.userId)
+        if (!user.isPresent) {
+            return null
+        }
+        val bookMarkCategory = (if (bookMarkDTO.categoryId == -1L) {
+            bookMarkCategoryRepository.findByUser_UidAndCategoryName(user.get().uid!!, "未分类").let {
+                if (it == null) {
+                    val bookMarkCategory = BookMarkCategory(categoryName = "未分类", user = user.get())
+                    bookMarkCategoryRepository.save(bookMarkCategory)
+                } else {
+                    it
+                }
+            }
+        } else {
+            bookMarkCategoryRepository.findById(bookMarkDTO.categoryId).let {
+                if (it.isPresent) {
+                    it.get()
+                } else {
+                    null
+                }
+            }
+        }) ?: return null
+        val bookMark = BookMark(url = bookMarkDTO.url, createTime = bookMarkDTO.createTime, bookMarkCategory = bookMarkCategory)
         bookMarkRepository.save(bookMark)
-        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail)
+        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail, bookMark.bookMarkCategory)
     }
 
     private fun validBookMark(bookMarkDTO: BookMarkDTO): Boolean {
@@ -56,7 +92,7 @@ class BookMarkServiceImpl : BookMarkService {
     override fun getBookMarks(pageable: Pageable): Page<BookMarkVO> {
         val bookMarks = bookMarkRepository.findAll(pageable)
         return bookMarks.map {
-            BookMarkVO(it.id, it.url, it.createTime, it.bookMarkDetail)
+            BookMarkVO(it.id, it.url, it.createTime, it.bookMarkDetail, it.bookMarkCategory)
         }
     }
 

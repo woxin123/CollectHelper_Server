@@ -1,4 +1,4 @@
-GET http://localhost:8080/bookmarks?page=1&size=2
+GET http://localhost:8080/bookmarks?page=0&size=2
 Accept: application/json
 
 ###

@@ -2,7 +2,7 @@ package online.mengchen.collect_helper.service.impl
 
 import online.mengchen.collect_helper.dao.UserRepository
 import online.mengchen.collect_helper.pojo.User
-import online.mengchen.collect_helper.pojo.dto.UserDTO
+import online.mengchen.collect_helper.pojo.dto.RegisterUserDTO
 import online.mengchen.collect_helper.pojo.vo.UserVO
 import online.mengchen.collect_helper.service.UserService
 import online.mengchen.collect_helper.utils.EncryptUtils
@@ -29,12 +29,12 @@ class UserServiceImpl : UserService {
         return false
     }
 
-    override fun addUser(userDTO: UserDTO): UserVO {
+    override fun addUser(registerUserDTO: RegisterUserDTO): UserVO {
         val user = User()
-        user.username = userDTO.username
+        user.username = registerUserDTO.username
         // 对密码进行加密
-        user.password = EncryptUtils.encryptUserSHA256(userDTO.password)
-        user.avatar = userDTO.avatar
+        user.password = EncryptUtils.encryptUserSHA256(registerUserDTO.password)
+        user.avatar = registerUserDTO.avatar
         userRepository.save(user)
         return UserVO.convert(user)
     }

@@ -12,5 +12,6 @@ data class BookMarkDTO (
         @NotBlank
         @Length
         val url: String,
+        var categoryId: Long = -1,
         val createTime: LocalDateTime = LocalDateTime.now()
 )

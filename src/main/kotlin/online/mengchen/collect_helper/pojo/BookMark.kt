@@ -10,7 +10,13 @@ data class BookMark(
         var id: Long = -1,
         var url: String = "",
         var createTime: LocalDateTime = LocalDateTime.now(),
-        @OneToOne
+        @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "detail_id", referencedColumnName = "id")
-        var bookMarkDetail: BookMarkDetail? = null
+        var bookMarkDetail: BookMarkDetail? = null,
+        @ManyToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "category_id")
+        var bookMarkCategory: BookMarkCategory = BookMarkCategory(),
+        @ManyToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "uid")
+        var user: User = User()
 )
