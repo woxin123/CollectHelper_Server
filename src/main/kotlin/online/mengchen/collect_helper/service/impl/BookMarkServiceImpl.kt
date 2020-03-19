@@ -6,6 +6,8 @@ import online.mengchen.collect_helper.pojo.dto.BookMarkDTO
 import online.mengchen.collect_helper.pojo.vo.BookMarkVO
 import online.mengchen.collect_helper.service.BookMarkService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -32,7 +34,7 @@ class BookMarkServiceImpl : BookMarkService {
         }
         val bookMark = BookMark(url = bookMarkDTO.url, createTime = bookMarkDTO.createTime)
         bookMarkRepository.save(bookMark)
-        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime)
+        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail)
     }
 
     private fun validBookMark(bookMarkDTO: BookMarkDTO): Boolean {
@@ -51,5 +53,11 @@ class BookMarkServiceImpl : BookMarkService {
         return false
     }
 
+    override fun getBookMarks(pageable: Pageable): Page<BookMarkVO> {
+        val bookMarks = bookMarkRepository.findAll(pageable)
+        return bookMarks.map {
+            BookMarkVO(it.id, it.url, it.createTime, it.bookMarkDetail)
+        }
+    }
 
 }

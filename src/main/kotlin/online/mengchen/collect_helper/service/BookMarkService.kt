@@ -2,6 +2,8 @@ package online.mengchen.collect_helper.service
 
 import online.mengchen.collect_helper.pojo.dto.BookMarkDTO
 import online.mengchen.collect_helper.pojo.vo.BookMarkVO
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 /**
  * @Author mengchen
@@ -9,4 +11,5 @@ import online.mengchen.collect_helper.pojo.vo.BookMarkVO
  */
 interface BookMarkService {
     fun addBookMark(bookMarkDTO: BookMarkDTO): BookMarkVO?
+    fun getBookMarks(pageable: Pageable): Page<BookMarkVO>
 }

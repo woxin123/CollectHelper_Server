@@ -1,5 +1,6 @@
 package online.mengchen.collect_helper.pojo.vo
 
+import online.mengchen.collect_helper.pojo.BookMarkDetail
 import java.time.LocalDateTime
 
 /**
@@ -9,5 +10,6 @@ import java.time.LocalDateTime
 data class BookMarkVO(
         var id: Long,
         var url: String,
-        var createTime: LocalDateTime
+        var createTime: LocalDateTime,
+        var bookMarkDetail: BookMarkDetail?
 )

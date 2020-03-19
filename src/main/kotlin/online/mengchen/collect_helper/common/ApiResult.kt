@@ -8,11 +8,11 @@ class ApiResult<T>(
         /**
          * 消息提示
          */
-        private var message: String?,
+        var message: String?,
         /**
          * 数据
          */
-        private var data: T? = null) {
+         var data: T? = null) {
 
     companion object {
         fun <T> success(data: T? = null, message: String? = null): ApiResult<T> {

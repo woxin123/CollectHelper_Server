@@ -3,7 +3,7 @@ package online.mengchen.collect_helper.pojo
 import javax.persistence.*
 
 @Entity
-class BookMarkDetial(
+class BookMarkDetail(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long = -1,
@@ -11,6 +11,5 @@ class BookMarkDetial(
         var summary: String = "",
         var icon: String = "",
         @OneToOne
-        @JoinColumn(name = "bid", referencedColumnName = "id")
         var bookMark: BookMark = BookMark()
 )
