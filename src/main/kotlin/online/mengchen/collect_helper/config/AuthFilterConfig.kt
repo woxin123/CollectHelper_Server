@@ -20,7 +20,10 @@ class AuthFilterConfig: WebMvcConfigurer {
 
     override fun addInterceptors(registry: InterceptorRegistry) {
         registry.addInterceptor(AuthorizationFilter())
+                .addPathPatterns(Constant.BookMark.BOOK_MARK)
                 .addPathPatterns(Constant.BookMark.BOOK_MARK + "/*")
+                .addPathPatterns(Constant.BookMark.BOOK_MARK_CATEGORY)
+                .addPathPatterns(Constant.BookMark.BOOK_MARK_CATEGORY + "/*")
     }
 
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
