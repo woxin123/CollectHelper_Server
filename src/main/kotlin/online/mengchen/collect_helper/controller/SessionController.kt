@@ -28,9 +28,9 @@ class SessionController {
         return if (userService.login(user.username, user.password)) {
             val userVO: UserVO = userService.findUserByUsername(user.username)!!
             session.setAttribute(Session.USER, UserDTO(userVO.userId, userVO.username, userVO.phone, userVO.avatar))
-            ResponseEntity.status(HttpStatus.CREATED).body(ApiResult.success(userVO))
+            ResponseEntity.status(HttpStatus.CREATED).body(ApiResult.success(HttpStatus.CREATED.value(), userVO))
         } else {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResult("用户名或密码错误"))
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResult(HttpStatus.BAD_REQUEST.value(), "用户名或密码错误"))
         }
     }
 
@@ -42,7 +42,7 @@ class SessionController {
 
     @RequestMapping(Session.SESSION_ERROR)
     fun error(): ResponseEntity<ApiResult<Unit>> {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiResult.failed("没有访问权限"))
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiResult.failed(HttpStatus.UNAUTHORIZED.value(),"没有访问权限"))
     }
 
 }

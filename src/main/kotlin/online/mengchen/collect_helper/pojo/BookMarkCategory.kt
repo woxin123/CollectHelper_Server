@@ -12,7 +12,7 @@ import javax.persistence.*
 data class BookMarkCategory(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var categoryId: Long = -1,
+        var categoryId: Long? = null,
         var categoryName: String = "",
         @ManyToOne
         @JoinColumn(name = "uid")

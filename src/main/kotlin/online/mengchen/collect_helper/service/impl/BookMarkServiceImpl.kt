@@ -96,4 +96,13 @@ class BookMarkServiceImpl : BookMarkService {
         }
     }
 
+    override fun deleteBookMark(bookMarkId: Long): Boolean {
+        return if (bookMarkRepository.findById(bookMarkId).isPresent) {
+            bookMarkRepository.deleteById(bookMarkId)
+            true
+        } else {
+            false
+        }
+    }
+
 }

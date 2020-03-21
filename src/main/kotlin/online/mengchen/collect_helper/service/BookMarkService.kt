@@ -13,4 +13,5 @@ import org.springframework.data.domain.Pageable
 interface BookMarkService {
     fun addBookMark(bookMarkDTO: BookMarkDTO, userDTO: UserDTO): BookMarkVO?
     fun getBookMarks(pageable: Pageable): Page<BookMarkVO>
+    fun deleteBookMark(bookMarkId: Long): Boolean
 }

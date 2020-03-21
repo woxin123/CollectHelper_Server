@@ -24,7 +24,7 @@ class UserController {
     @PostMapping("/users")
     fun createUser(@RequestBody registerUser: RegisterUserDTO): ResponseEntity<ApiResult<UserVO>> {
         return userService.addUser(registerUser).let {
-            ResponseEntity.status(HttpStatus.CREATED).body(ApiResult.success(it))
+            ResponseEntity.status(HttpStatus.CREATED).body(ApiResult.success(HttpStatus.CREATED.value(), it))
         }
     }
 

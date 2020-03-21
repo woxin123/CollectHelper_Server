@@ -14,6 +14,7 @@ object Constant {
 
     object BookMark {
         const val BOOK_MARK = "/bookmarks"
+        const val BOOK_MARK_CATEGORY = "/bookmarkCategories"
     }
 
 }
