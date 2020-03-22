@@ -1,8 +1,8 @@
-DELETE http://localhost:8080/bookmarks/1
+DELETE http://localhost:8080/bookmarks/6
 Accept: application/json
 
 ###
-GET http://localhost:8080/bookmarks?page=0&size=2
+GET http://localhost:8080/bookmarks?page=0&size=100
 Accept: application/json
 
 ###
@@ -10,7 +10,8 @@ POST http://localhost:8080/bookmarks
 Content-Type: application/json
 
 {
-  "url": "https://www.baidu.com"
+  "url": "https://www.baidu.com",
+  "categoryId": "5"
 }
 
 ###

@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository
  * @create 2020-29-18 17:29
  */
 interface BookMarkRepository: JpaRepository<BookMark, Long> {
+    fun countByBookMarkCategory_CategoryId(categoryId: Long): Int
 }

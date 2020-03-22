@@ -13,5 +13,5 @@ data class BookMarkVO(
         var url: String,
         var createTime: LocalDateTime,
         var bookMarkDetail: BookMarkDetail?,
-        var bookMarkCategory: BookMarkCategory
+        var bookMarkCategory: BookMarkCategoryVO
 )

@@ -13,5 +13,5 @@ interface BookMarkCategoryService {
     fun addBookMarkCategory(bookMarkCategoryDTO: BookMarkCategoryDTO, userDTO: UserDTO): BookMarkCategoryVO?
     fun getBookMarkCategories(userDTO: UserDTO): List<BookMarkCategoryVO>
     fun updateBookMarkCategory(bookMarkCategoryDTO: BookMarkCategoryDTO, userDTO: UserDTO): ApiResult<BookMarkCategoryVO>
-//    fun deleteBookMarkCategory(): Boolean
+    fun deleteBookMarkCategory(categoryId: Long, userDTO: UserDTO): ApiResult<Unit>
 }

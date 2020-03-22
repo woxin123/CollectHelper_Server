@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface BookMarkCategoryRepository: JpaRepository<BookMarkCategory, Long> {
     fun findByUser_UidAndCategoryName(uid: Long, categoryName: String): BookMarkCategory?
     fun existsByUser_UidAndCategoryName(uid: Long, categoryName: String): Boolean
+    fun existsByUser_UidAndCategoryId(uid: Long, categoryId: Long): Boolean
     fun findAllByUser_Uid(uid: Long): List<BookMarkCategoryVO>
 //    fun deleteByUser_UidAAndCategoryId(uid: Long, categoryId: Long)
 }

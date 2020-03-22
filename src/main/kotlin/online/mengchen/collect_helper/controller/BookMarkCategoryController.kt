@@ -47,9 +47,11 @@ class BookMarkCategoryController {
         }
     }
 
-//    @DeleteMapping
-//    fun deleteBookMarkCategory(): ResponseEntity<ApiResult<Unit>> {
-//        return bookMarkCategoryService.deleteBookMarkCategory()
-//    }
+    @DeleteMapping("/{categoryId}")
+    fun deleteBookMarkCategory(@PathVariable categoryId: Long, @CurrentUser userDTO: UserDTO): ResponseEntity<ApiResult<Unit>> {
+        return bookMarkCategoryService.deleteBookMarkCategory(categoryId, userDTO).let {
+            ResponseEntity.status(it.status).body(it)
+        }
+    }
 
 }
