@@ -6,8 +6,15 @@ package online.mengchen.collect_helper.common
  */
 object Constant {
 
-    object SESSION {
+    object Session {
+        const val SESSIONS = "/sessions"
+        const val SESSION_ERROR = "/sessions/error"
         const val USER = "user"
+    }
+
+    object BookMark {
+        const val BOOK_MARK = "/bookmarks"
+        const val BOOK_MARK_CATEGORY = "/bookmarkCategories"
     }
 
 }

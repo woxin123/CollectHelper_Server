@@ -1,0 +1,16 @@
+DELETE http://localhost:8080/bookmarkCategories/5
+Accept: application/json
+
+###
+POST http://localhost:8080/bookmarkCategories
+Content-Type: application/json
+
+{
+"categoryName": "沙雕"
+}
+
+###
+GET http://localhost:8080/bookmarkCategories
+Accept: application/json
+
+###

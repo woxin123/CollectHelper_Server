@@ -5,23 +5,24 @@ package online.mengchen.collect_helper.common
  * @create 2020-38-16 23:38
  */
 class ApiResult<T>(
+        var status: Int,
         /**
          * 消息提示
          */
-        private var message: String?,
+        var message: String?,
         /**
          * 数据
          */
-        private var data: T? = null) {
+         var data: T? = null) {
 
     companion object {
-        fun <T> success(data: T? = null, message: String? = null): ApiResult<T> {
-            return ApiResult(message, data)
+        fun <T> success(status: Int, data: T? = null, message: String? = null): ApiResult<T> {
+            return ApiResult(status, message, data)
         }
 
 
-        fun <T> failed(message: String): ApiResult<T> {
-            return ApiResult(message)
+        fun <T> failed(status: Int, message: String): ApiResult<T> {
+            return ApiResult(status, message)
         }
     }
 

@@ -1,8 +1,9 @@
 package online.mengchen.collect_helper.controller
 
 import online.mengchen.collect_helper.common.ApiResult
-import online.mengchen.collect_helper.common.Constant
+import online.mengchen.collect_helper.common.Constant.Session
 import online.mengchen.collect_helper.pojo.dto.LoginUser
+import online.mengchen.collect_helper.pojo.dto.UserDTO
 import online.mengchen.collect_helper.pojo.vo.UserVO
 import online.mengchen.collect_helper.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,26 +23,26 @@ class SessionController {
     @Autowired
     lateinit var userService: UserService
 
-    @PostMapping("/sessions")
+    @PostMapping(Session.SESSIONS)
     fun createSession(@RequestBody user: LoginUser, session: HttpSession): ResponseEntity<ApiResult<UserVO>> {
         return if (userService.login(user.username, user.password)) {
-            val userVO: UserVO? = userService.findUserByUsername(user.username)
-            session.setAttribute(Constant.SESSION.USER, userVO)
-            ResponseEntity.status(HttpStatus.CREATED).body(ApiResult.success(userVO))
+            val userVO: UserVO = userService.findUserByUsername(user.username)!!
+            session.setAttribute(Session.USER, UserDTO(userVO.userId, userVO.username, userVO.phone, userVO.avatar))
+            ResponseEntity.status(HttpStatus.CREATED).body(ApiResult.success(HttpStatus.CREATED.value(), userVO))
         } else {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResult("用户名或密码错误"))
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResult(HttpStatus.BAD_REQUEST.value(), "用户名或密码错误"))
         }
     }
 
-    @DeleteMapping("/sessions")
+    @DeleteMapping(Session.SESSIONS)
     fun deleteMapping(session: HttpSession): ResponseEntity<Unit> {
-        session.removeAttribute(Constant.SESSION.USER)
+        session.removeAttribute(Session.USER)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 
-    @RequestMapping("/sessions/error")
+    @RequestMapping(Session.SESSION_ERROR)
     fun error(): ResponseEntity<ApiResult<Unit>> {
-        return ResponseEntity.ok(ApiResult.failed("没有访问权限"))
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiResult.failed(HttpStatus.UNAUTHORIZED.value(),"没有访问权限"))
     }
 
 }

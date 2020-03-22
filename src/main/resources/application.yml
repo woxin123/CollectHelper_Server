@@ -3,9 +3,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: Mc129314+-
-    url: jdbc:mysql://localhost:3306/collection_help
+    url: jdbc:mysql://localhost:3306/collection_help?serverTimezone=GMT%2b8
   jpa:
     generate-ddl: true
     show-sql: true
+
   jackson:
     default-property-inclusion: non_null

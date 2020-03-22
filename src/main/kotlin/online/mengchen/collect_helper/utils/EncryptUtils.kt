@@ -1,7 +1,5 @@
 package online.mengchen.collect_helper.utils
 
-import com.sun.javafx.scene.traversal.Algorithm
-import java.security.AlgorithmParameters
 import java.security.MessageDigest
 import java.security.SecureRandom
 
