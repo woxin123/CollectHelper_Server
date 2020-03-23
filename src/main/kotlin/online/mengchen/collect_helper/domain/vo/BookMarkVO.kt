@@ -1,7 +1,6 @@
-package online.mengchen.collect_helper.pojo.vo
+package online.mengchen.collect_helper.domain.vo
 
-import online.mengchen.collect_helper.pojo.BookMarkCategory
-import online.mengchen.collect_helper.pojo.BookMarkDetail
+import online.mengchen.collect_helper.domain.entity.BookMarkDetail
 import java.time.LocalDateTime
 
 /**

@@ -1,9 +1,9 @@
 package online.mengchen.collect_helper.service.impl
 
 import online.mengchen.collect_helper.dao.UserRepository
-import online.mengchen.collect_helper.pojo.User
-import online.mengchen.collect_helper.pojo.dto.RegisterUserDTO
-import online.mengchen.collect_helper.pojo.vo.UserVO
+import online.mengchen.collect_helper.domain.entity.User
+import online.mengchen.collect_helper.domain.dto.RegisterUserDTO
+import online.mengchen.collect_helper.domain.vo.UserVO
 import online.mengchen.collect_helper.service.UserService
 import online.mengchen.collect_helper.utils.EncryptUtils
 import org.springframework.beans.factory.annotation.Autowired

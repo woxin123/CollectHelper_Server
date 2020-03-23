@@ -1,7 +1,7 @@
 package online.mengchen.collect_helper.service
 
-import online.mengchen.collect_helper.pojo.dto.RegisterUserDTO
-import online.mengchen.collect_helper.pojo.vo.UserVO
+import online.mengchen.collect_helper.domain.dto.RegisterUserDTO
+import online.mengchen.collect_helper.domain.vo.UserVO
 
 /**
  * @Author mengchen

@@ -1,6 +1,6 @@
 package online.mengchen.collect_helper.dao
 
-import online.mengchen.collect_helper.pojo.User
+import online.mengchen.collect_helper.domain.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 /**

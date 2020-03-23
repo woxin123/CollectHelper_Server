@@ -1,6 +1,6 @@
 package online.mengchen.collect_helper.dao
 
-import online.mengchen.collect_helper.pojo.BookMark
+import online.mengchen.collect_helper.domain.entity.BookMark
 import org.springframework.data.jpa.repository.JpaRepository
 
 /**

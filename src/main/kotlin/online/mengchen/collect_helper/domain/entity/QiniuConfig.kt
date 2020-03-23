@@ -1,4 +1,4 @@
-package online.mengchen.collect_helper.pojo
+package online.mengchen.collect_helper.domain.entity
 
 import javax.persistence.*
 
@@ -6,7 +6,7 @@ import javax.persistence.*
 data class QiniuConfig(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var qiniuId: Long = -1,
+        var qiniuId: Long = 0,
 
         @Column(name = "bucket", nullable = false)
         var bucket: String = "",

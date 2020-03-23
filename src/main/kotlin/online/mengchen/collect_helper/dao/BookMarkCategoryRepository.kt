@@ -1,8 +1,7 @@
 package online.mengchen.collect_helper.dao
 
-import online.mengchen.collect_helper.pojo.BookMarkCategory
-import online.mengchen.collect_helper.pojo.User
-import online.mengchen.collect_helper.pojo.vo.BookMarkCategoryVO
+import online.mengchen.collect_helper.domain.entity.BookMarkCategory
+import online.mengchen.collect_helper.domain.vo.BookMarkCategoryVO
 import org.springframework.data.jpa.repository.JpaRepository
 
 /**

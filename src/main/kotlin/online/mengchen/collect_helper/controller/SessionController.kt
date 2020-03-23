@@ -2,9 +2,9 @@ package online.mengchen.collect_helper.controller
 
 import online.mengchen.collect_helper.common.ApiResult
 import online.mengchen.collect_helper.common.Constant.Session
-import online.mengchen.collect_helper.pojo.dto.LoginUser
-import online.mengchen.collect_helper.pojo.dto.UserDTO
-import online.mengchen.collect_helper.pojo.vo.UserVO
+import online.mengchen.collect_helper.domain.dto.LoginUser
+import online.mengchen.collect_helper.domain.dto.UserDTO
+import online.mengchen.collect_helper.domain.vo.UserVO
 import online.mengchen.collect_helper.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

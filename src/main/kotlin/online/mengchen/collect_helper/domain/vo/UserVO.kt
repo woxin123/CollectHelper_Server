@@ -1,6 +1,6 @@
-package online.mengchen.collect_helper.pojo.vo
+package online.mengchen.collect_helper.domain.vo
 
-import online.mengchen.collect_helper.pojo.User
+import online.mengchen.collect_helper.domain.entity.User
 import java.io.Serializable
 
 /**

@@ -1,4 +1,4 @@
-package online.mengchen.collect_helper.pojo
+package online.mengchen.collect_helper.domain.entity
 
 import online.mengchen.collect_helper.common.FileType
 import java.time.LocalDateTime

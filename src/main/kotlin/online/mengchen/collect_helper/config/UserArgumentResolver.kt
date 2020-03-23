@@ -2,8 +2,7 @@ package online.mengchen.collect_helper.config
 
 import online.mengchen.collect_helper.common.Constant
 import online.mengchen.collect_helper.common.annotation.CurrentUser
-import online.mengchen.collect_helper.pojo.dto.UserDTO
-import online.mengchen.collect_helper.pojo.vo.UserVO
+import online.mengchen.collect_helper.domain.dto.UserDTO
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.support.WebDataBinderFactory

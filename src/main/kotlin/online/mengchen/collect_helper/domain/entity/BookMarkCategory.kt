@@ -1,7 +1,6 @@
-package online.mengchen.collect_helper.pojo
+package online.mengchen.collect_helper.domain.entity
 
 import java.time.LocalDateTime
-import javax.annotation.Generated
 import javax.persistence.*
 
 /**

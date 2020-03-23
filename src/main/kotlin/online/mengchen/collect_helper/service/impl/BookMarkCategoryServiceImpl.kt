@@ -4,10 +4,10 @@ import online.mengchen.collect_helper.common.ApiResult
 import online.mengchen.collect_helper.dao.BookMarkCategoryRepository
 import online.mengchen.collect_helper.dao.BookMarkRepository
 import online.mengchen.collect_helper.dao.UserRepository
-import online.mengchen.collect_helper.pojo.BookMarkCategory
-import online.mengchen.collect_helper.pojo.dto.BookMarkCategoryDTO
-import online.mengchen.collect_helper.pojo.dto.UserDTO
-import online.mengchen.collect_helper.pojo.vo.BookMarkCategoryVO
+import online.mengchen.collect_helper.domain.entity.BookMarkCategory
+import online.mengchen.collect_helper.domain.dto.BookMarkCategoryDTO
+import online.mengchen.collect_helper.domain.dto.UserDTO
+import online.mengchen.collect_helper.domain.vo.BookMarkCategoryVO
 import online.mengchen.collect_helper.service.BookMarkCategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

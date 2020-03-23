@@ -3,9 +3,9 @@ package online.mengchen.collect_helper.controller
 import online.mengchen.collect_helper.common.ApiResult
 import online.mengchen.collect_helper.common.Constant
 import online.mengchen.collect_helper.common.annotation.CurrentUser
-import online.mengchen.collect_helper.pojo.dto.BookMarkCategoryDTO
-import online.mengchen.collect_helper.pojo.dto.UserDTO
-import online.mengchen.collect_helper.pojo.vo.BookMarkCategoryVO
+import online.mengchen.collect_helper.domain.dto.BookMarkCategoryDTO
+import online.mengchen.collect_helper.domain.dto.UserDTO
+import online.mengchen.collect_helper.domain.vo.BookMarkCategoryVO
 import online.mengchen.collect_helper.service.BookMarkCategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

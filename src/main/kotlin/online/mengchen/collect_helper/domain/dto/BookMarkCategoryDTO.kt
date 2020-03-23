@@ -1,4 +1,4 @@
-package online.mengchen.collect_helper.pojo.dto
+package online.mengchen.collect_helper.domain.dto
 
 /**
  * @Author mengchen
