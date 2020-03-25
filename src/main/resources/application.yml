@@ -9,4 +9,6 @@ spring:
     show-sql: true
 
   jackson:
-    default-property-inclusion: non_null
+    default-property-inclusion: always
+server:
+  address: 0.0.0.0

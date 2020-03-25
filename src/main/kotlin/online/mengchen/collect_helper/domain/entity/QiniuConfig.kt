@@ -27,7 +27,7 @@ data class QiniuConfig(
         var qiniuAK: String? = null,
         var qiniuSK: String? = null,
         var storeRegion: String? = null,
-        @OneToOne(cascade = [CascadeType.ALL])
+        @OneToOne(cascade = [CascadeType.DETACH])
         @JoinColumn(name = "uid", referencedColumnName = "uid")
         var user: User? = null
 )

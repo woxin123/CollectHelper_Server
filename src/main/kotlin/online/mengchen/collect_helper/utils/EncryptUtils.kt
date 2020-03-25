@@ -33,7 +33,6 @@ object EncryptUtils {
         salt.copyInto(res, 0, 0)
         encryptByteArray.copyInto(res, SALT_LENGTH, 0)
         val entryPass = byteToHexString(res)
-        println(entryPass)
         if (entryPass == passwordInDB) {
             return true
         }
@@ -43,7 +42,7 @@ object EncryptUtils {
     private fun encryptUseSalt(str: String, salt: ByteArray): ByteArray {
         val digest = MessageDigest.getInstance("SHA-256")
         digest.update(salt)
-        return digest.digest()
+        return digest.digest(str.toByteArray())
     }
 
     private fun hexStringToByte(hex: String): ByteArray {
@@ -83,4 +82,10 @@ object EncryptUtils {
     private fun Char.digit(radix: Int): Int {
         return Character.digit(this, radix)
     }
+}
+
+fun main() {
+    val passwordInDb = EncryptUtils.encryptUserSHA256("123456")
+    val res = EncryptUtils.validPassword("123456", passwordInDb)
+    println(res)
 }
