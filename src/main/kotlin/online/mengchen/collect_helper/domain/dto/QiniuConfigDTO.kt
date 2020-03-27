@@ -18,7 +18,7 @@ data class QiniuConfigDTO(
         var qiniuSK: String,
         var storeRegion: String? = null
 ) {
-    constructor(qiniu: QiniuConfig) : this(qiniu.qiniuId, qiniu.bucket, qiniu.imageBucket, qiniu.documentBucket,
+    constructor(qiniu: QiniuConfig) : this(qiniu.qiniuId!!, qiniu.bucket, qiniu.imageBucket, qiniu.documentBucket,
             qiniu.musicBucket, qiniu.videoBucket, qiniu.imagePath, qiniu.documentPath, qiniu.musicPath, qiniu.videoPath,
             qiniu.qiniuAK!!, qiniu.qiniuSK!!, qiniu.storeRegion)
 

@@ -6,7 +6,7 @@ import javax.persistence.*
 data class QiniuConfig(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var qiniuId: Long = 0,
+        var qiniuId: Long? = null,
 
         @Column(name = "bucket", nullable = false)
         var bucket: String = "",

@@ -7,7 +7,7 @@ import javax.persistence.*
 class BookMarkDetail(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long = -1,
+        var id: Long? = null,
         var title: String = "",
         var summary: String = "",
         var icon: String = "",

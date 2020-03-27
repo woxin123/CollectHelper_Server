@@ -74,7 +74,7 @@ class BookMarkServiceImpl : BookMarkService {
         val bookMark = BookMark(url = bookMarkDTO.url, createTime = bookMarkDTO.createTime,
                 bookMarkCategory = bookMarkCategory, user = user.get())
         bookMarkRepository.save(bookMark)
-        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail,
+        return BookMarkVO(bookMark.id!!, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail,
                 BookMarkCategoryVO(bookMark.bookMarkCategory)).run {
             ApiResult.success(HttpStatus.CREATED.value(), this, "创建成功")
         }
@@ -99,7 +99,7 @@ class BookMarkServiceImpl : BookMarkService {
     override fun getBookMarks(pageable: Pageable): ApiResult<Page<BookMarkVO>> {
         val bookMarks = bookMarkRepository.findAll(pageable)
         return bookMarks.map {
-            BookMarkVO(it.id, it.url, it.createTime, it.bookMarkDetail, BookMarkCategoryVO(it.bookMarkCategory))
+            BookMarkVO(it.id!!, it.url, it.createTime, it.bookMarkDetail, BookMarkCategoryVO(it.bookMarkCategory))
         }.run { ApiResult.success(HttpStatus.OK.value(), this) }
     }
 

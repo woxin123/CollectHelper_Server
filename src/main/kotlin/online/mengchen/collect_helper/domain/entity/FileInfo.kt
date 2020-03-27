@@ -13,7 +13,7 @@ import javax.persistence.*
 data class FileInfo (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var fid: Long = -1,
+        var fid: Long? = null,
         @Column
         var name: String = "",
         @Enumerated(EnumType.ORDINAL)

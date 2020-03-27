@@ -7,7 +7,7 @@ import javax.persistence.*
 data class BookMark(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long = -1,
+        var id: Long? = null,
         var url: String = "",
         var createTime: LocalDateTime = LocalDateTime.now(),
         @OneToOne(cascade = [CascadeType.DETACH])
