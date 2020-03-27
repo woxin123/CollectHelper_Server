@@ -10,7 +10,7 @@ POST http://localhost:8080/bookmarks
 Content-Type: application/json
 
 {
-  "url": "https://www.baidu.com",
+  "url": "https://blog.csdn.net/qq_26033289/article/details/81700201",
   "categoryId": "-1"
 }
 
