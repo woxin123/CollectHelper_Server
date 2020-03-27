@@ -6,6 +6,8 @@ package online.mengchen.collect_helper.common
  */
 object Constant {
 
+    const val DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
+
     object Session {
         const val SESSIONS = "/sessions"
         const val SESSION_ERROR = "/sessions/error"

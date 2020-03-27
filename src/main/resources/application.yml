@@ -10,5 +10,8 @@ spring:
 
   jackson:
     default-property-inclusion: always
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
 server:
   address: 0.0.0.0
+
