@@ -42,7 +42,6 @@ class BookMarkServiceImpl : BookMarkService {
     private var restTemplate: RestTemplate = RestTemplate()
 
     /**
-     * TODO 改造返回值
      * 校验 categoryId
      *  - -1 查找是否有未分类的类别，如果没有创建一个
      */
@@ -97,11 +96,11 @@ class BookMarkServiceImpl : BookMarkService {
         return false
     }
 
-    override fun getBookMarks(pageable: Pageable): Page<BookMarkVO> {
+    override fun getBookMarks(pageable: Pageable): ApiResult<Page<BookMarkVO>> {
         val bookMarks = bookMarkRepository.findAll(pageable)
         return bookMarks.map {
             BookMarkVO(it.id, it.url, it.createTime, it.bookMarkDetail, BookMarkCategoryVO(it.bookMarkCategory))
-        }
+        }.run { ApiResult.success(HttpStatus.OK.value(), this) }
     }
 
     override fun deleteBookMark(bookMarkId: Long): Boolean {

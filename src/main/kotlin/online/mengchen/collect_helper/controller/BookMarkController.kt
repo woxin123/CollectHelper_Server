@@ -7,6 +7,7 @@ import online.mengchen.collect_helper.domain.dto.BookMarkDTO
 import online.mengchen.collect_helper.domain.dto.UserDTO
 import online.mengchen.collect_helper.domain.vo.BookMarkVO
 import online.mengchen.collect_helper.service.BookMarkService
+import online.mengchen.collect_helper.utils.createResponseEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -28,15 +29,11 @@ class BookMarkController {
     @PostMapping(Constant.BookMark.BOOK_MARK)
     fun addBookMark(@RequestBody bookMark: BookMarkDTO, @CurrentUser user: UserDTO): ResponseEntity<ApiResult<BookMarkVO>> =
             bookMarkService.addBookMark(bookMark, user).let {
-                return if (it == null) {
-                    ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResult(HttpStatus.BAD_REQUEST.value(), "url 不正确或无法访问"))
-                } else {
-                    ResponseEntity.status(HttpStatus.CREATED).body(ApiResult(HttpStatus.CREATED.value(), "创建成功"))
-                }
+                createResponseEntity(it)
             }
 
     @GetMapping(Constant.BookMark.BOOK_MARK)
-    fun getBookMarks(@PageableDefault(page = 0, size = 10) page: Pageable): Page<BookMarkVO> {
+    fun getBookMarks(@PageableDefault(page = 0, size = 10) page: Pageable): ApiResult<Page<BookMarkVO>> {
         return bookMarkService.getBookMarks(page)
     }
 
