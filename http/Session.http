@@ -2,12 +2,12 @@ DELETE http://localhost:8080/sessions
 Accept: application/json
 
 ###
-POST http://192.168.1.101:8080/sessions
+POST http://localhost:8080/sessions
 Content-Type: application/json
 
 {
   "username": "woxin",
-  "password": "1234"
+  "password": "123456"
 }
 
 ###

@@ -1,5 +1,6 @@
 package online.mengchen.collect_helper.service.impl
 
+import online.mengchen.collect_helper.common.ApiResult
 import online.mengchen.collect_helper.dao.BookMarkCategoryRepository
 import online.mengchen.collect_helper.dao.BookMarkRepository
 import online.mengchen.collect_helper.dao.UserRepository
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
@@ -40,16 +42,17 @@ class BookMarkServiceImpl : BookMarkService {
     private var restTemplate: RestTemplate = RestTemplate()
 
     /**
+     * TODO 改造返回值
      * 校验 categoryId
      *  - -1 查找是否有未分类的类别，如果没有创建一个
      */
-    override fun addBookMark(bookMarkDTO: BookMarkDTO, userDTO: UserDTO): BookMarkVO? {
+    override fun addBookMark(bookMarkDTO: BookMarkDTO, userDTO: UserDTO): ApiResult<BookMarkVO> {
         if (!validBookMark(bookMarkDTO)) {
-            return null
+            return ApiResult.failed(HttpStatus.BAD_REQUEST.value(), "url 不合法或无法访问")
         }
         val user = userRepository.findById(userDTO.userId)
         if (!user.isPresent) {
-            return null
+            return ApiResult.failed(HttpStatus.UNAUTHORIZED.value(), "需要登录")
         }
         val bookMarkCategory = (if (bookMarkDTO.categoryId == -1L) {
             bookMarkCategoryRepository.findByUser_UidAndCategoryName(user.get().uid!!, "未分类").let {
@@ -68,10 +71,14 @@ class BookMarkServiceImpl : BookMarkService {
                     null
                 }
             }
-        }) ?: return null
-        val bookMark = BookMark(url = bookMarkDTO.url, createTime = bookMarkDTO.createTime, bookMarkCategory = bookMarkCategory)
+        }) ?: return ApiResult.failed(HttpStatus.INTERNAL_SERVER_ERROR.value(), "内部错误")
+        val bookMark = BookMark(url = bookMarkDTO.url, createTime = bookMarkDTO.createTime,
+                bookMarkCategory = bookMarkCategory, user = user.get())
         bookMarkRepository.save(bookMark)
-        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail, BookMarkCategoryVO(bookMark.bookMarkCategory))
+        return BookMarkVO(bookMark.id, bookMark.url, bookMark.createTime, bookMark.bookMarkDetail,
+                BookMarkCategoryVO(bookMark.bookMarkCategory)).run {
+            ApiResult.success(HttpStatus.CREATED.value(), this, "创建成功")
+        }
     }
 
     private fun validBookMark(bookMarkDTO: BookMarkDTO): Boolean {
