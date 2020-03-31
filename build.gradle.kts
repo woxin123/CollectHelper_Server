@@ -20,6 +20,7 @@ configurations {
 }
 
 repositories {
+    maven("http://maven.aliyun.com/nexus/content/groups/public/")
     mavenCentral()
 }
 
