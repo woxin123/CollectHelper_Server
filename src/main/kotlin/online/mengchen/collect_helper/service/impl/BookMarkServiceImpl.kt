@@ -42,16 +42,26 @@ class BookMarkServiceImpl : BookMarkService {
     private var restTemplate: RestTemplate = RestTemplate()
 
     /**
-     * 校验 categoryId
-     *  - -1 查找是否有未分类的类别，如果没有创建一个
+     * 添加 book mark
+     * 1. 在数据库中该用户没有此 book mark
+     * 2. 校验是否能够访问
+     *
+     * return
+     *  - 201 创建成功
+     *  - 401 未授权
+     *  - 400 url 校验未通过
+     *  - 407 该用户已经收藏了指定的 url
      */
     override fun addBookMark(bookMarkDTO: BookMarkDTO, userDTO: UserDTO): ApiResult<BookMarkVO> {
-        if (!validBookMark(bookMarkDTO)) {
-            return ApiResult.failed(HttpStatus.BAD_REQUEST.value(), "url 不合法或无法访问")
-        }
         val user = userRepository.findById(userDTO.userId)
         if (!user.isPresent) {
             return ApiResult.failed(HttpStatus.UNAUTHORIZED.value(), "需要登录")
+        }
+        if (bookMarkRepository.existsByUser_UidAndUrl(userDTO.userId, bookMarkDTO.url)) {
+            return ApiResult.failed(HttpStatus.CONFLICT.value(), "该用户已经添加了 ${bookMarkDTO.url} 书签")
+        }
+        if (!validBookMark(bookMarkDTO)) {
+            return ApiResult.failed(HttpStatus.BAD_REQUEST.value(), "url 不合法或无法访问")
         }
         val bookMarkCategory = (if (bookMarkDTO.categoryId == -1L) {
             bookMarkCategoryRepository.findByUser_UidAndCategoryName(user.get().uid!!, "未分类").let {

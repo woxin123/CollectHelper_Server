@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository
  */
 interface BookMarkRepository: JpaRepository<BookMark, Long> {
     fun countByBookMarkCategory_CategoryId(categoryId: Long): Int
+    fun existsByUser_UidAndUrl(uid: Long, url: String): Boolean
 }
