@@ -57,7 +57,7 @@ class BookMarkServiceImpl : BookMarkService {
         if (!user.isPresent) {
             return ApiResult.failed(HttpStatus.UNAUTHORIZED.value(), "需要登录")
         }
-        if (bookMarkRepository.existsByUser_UidAndUrl(userDTO.userId, bookMarkDTO.url)) {
+        if (bookMarkRepository.existsByUser_UidAndBookMarkCategory_CategoryIdAndUrl(userDTO.userId, bookMarkDTO.categoryId, bookMarkDTO.url)) {
             return ApiResult.failed(HttpStatus.CONFLICT.value(), "该用户已经添加了 ${bookMarkDTO.url} 书签")
         }
         if (!validBookMark(bookMarkDTO)) {
