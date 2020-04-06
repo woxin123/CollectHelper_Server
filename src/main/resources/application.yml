@@ -14,4 +14,8 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
 server:
   address: 0.0.0.0
+  servlet:
+    session:
+      timeout: 7d
+
 
